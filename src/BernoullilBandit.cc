@@ -1,7 +1,6 @@
 #include "BernoulliBandit.h"
 
 BernoulliBandit::BernoulliBandit(const int n, double e, double l, double Qmax): Bandit(n, e, l) {
-
     for (int i=0; i<N; i++){
         true_values[i] = ((double) rand() / (RAND_MAX));
         q[i] = Qmax;
