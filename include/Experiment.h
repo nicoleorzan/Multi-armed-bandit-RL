@@ -28,6 +28,10 @@ class Experiment{
 
     void single_run(Bandit &b);
 
+    void single_run_UCB(Bandit &b, double c);
+
+    void single_run_Boltzmann(Bandit &b, double T);
+
     double* get_returns();
 
     int* get_opt_actions();

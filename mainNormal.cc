@@ -5,14 +5,21 @@
 #include <fstream>
 #include <time.h>   
 
-int main(){
+int main(int argc, char *argv[]){
+
+    if(argc!=3) {// even the executables name string is on argc
+        printf("unexpected number of arguments\n");
+        return -1;
+    }
 
     int N = 10;
     double var = 1;
-    double epsilon = 0.01;
-    double learning_rate = 0.05;
+    double epsilon = 0.1;
+    double learning_rate = 0.5;
     int run_length = 1000;
-    int n_runs = 20000;
+    int n_runs = 2000;
+    double c = 0.5;
+    double T = 0.1;
 
     double *re;
     int *op;
@@ -22,17 +29,17 @@ int main(){
     double *percentage_best_action = new double[run_length];
     double *stddev = new double[run_length];
 
-    double Qmax = 10;
+    double Qmax = 0;
 
     std::ofstream myfile;
-    myfile.open ("example.txt");
+    myfile.open ("example2.txt");
 
     // ===================== ARRAYS INITIALIZATIONS ======================
     for (int i=0; i<n_runs; i++){
         for (int j=0; j<run_length; j++){
             means[j] = 0;
             stddev[j] = 0;
-            percentage_best_action [j] = 0;
+            percentage_best_action[j] = 0;
         }
     }
 
@@ -45,15 +52,16 @@ int main(){
 
         NormalBandit b(N, epsilon, learning_rate, var, Qmax);
         Experiment e(epsilon, learning_rate, run_length);
-        e.single_run(b);
 
+        //e.single_run(b);
+        //e.single_run_UCB(b, c);
+        e.single_run_Boltzmann(b, T);
         re = e.get_returns();
         op = e.get_opt_actions();
         
         if (i == 0){
             b.print_true_values();
         }
-
         for (int j=0; j<run_length; j++){
             ret[i*run_length + j] = *(re + j);
             opt_action[i*run_length + j] = *(op + j);
