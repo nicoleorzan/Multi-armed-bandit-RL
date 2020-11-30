@@ -1,4 +1,4 @@
-#include "NormalBandit.h"
+#include "BernoulliBandit.h"
 #include "Experiment.h"
 #include <math.h>  
 #include <iostream>
@@ -17,11 +17,10 @@ int main(int argc, char *argv[]){
     int run_length = atoi(argv[1]);
     int n_runs = atoi(argv[2]);
 
-    double var = 1;
-    double epsilon = 0.001;
-    double learning_rate = 0.9;
-    double c = 10;
-    double T = 0.01;
+    double epsilon = 0.1;
+    double learning_rate = 0.1;
+    //double c = 10;
+    //double T = 0.01;
 
     double *re;
     int *op;
@@ -31,12 +30,10 @@ int main(int argc, char *argv[]){
     double *means1 = new double[run_length]();
     double *percentage_best_action = new double[run_length]();
     double *stddev = new double[run_length]();
-    //std::vector<std::vector<double>> returns;
 
     double Qmax = 0.;
-    //time(NULL);
     std::ofstream myfile;
-    myfile.open ("data/data_N10_normale_epsilon0001_alpha09.txt");
+    myfile.open ("data_bernoulli/data_N10_normale_epsilon01_alpha01.txt");
     myfile << "step   first_run   mean_reward_runs   std_reward_runs   percentage_opt_action\n";
 
     // =========================== RUN LOOPS =========================
@@ -48,7 +45,7 @@ int main(int argc, char *argv[]){
         srand(value);
         //std::cout<<value<<std::endl;
         //srand(i);
-        NormalBandit b(N, epsilon, learning_rate, var, Qmax);
+        BernoulliBandit b(N, epsilon, learning_rate, Qmax);
         Experiment e(epsilon, learning_rate, run_length);
 
         e.single_run(b);

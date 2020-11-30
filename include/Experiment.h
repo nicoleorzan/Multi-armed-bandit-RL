@@ -12,6 +12,9 @@ class Experiment{
 
         double *returns;
         int *opt_actions;
+
+        //std::vector<double> re;
+        //std::vector<double> opa;
         
     Experiment(double e, double l, int rl) {
         epsilon = e;
@@ -32,7 +35,11 @@ class Experiment{
 
     void single_run_Boltzmann(Bandit &b, double T);
 
+    void single_run_gradient(Bandit &b);
+
     double* get_returns();
+    
+    std::vector<double> get_returns_vector();
 
     int* get_opt_actions();
 };

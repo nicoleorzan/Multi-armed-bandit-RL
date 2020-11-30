@@ -9,7 +9,10 @@ NormalBandit::NormalBandit(const int n, double e, double l, double v, double Qma
         q[i] = Qmax;
         UCBvalues[i] = 10000;
         nt[i] = 0;
+        preferences[i]  = 0;
+        pii[i] = 0;
     }
+    avg_reward = 0;
 
 };
 
