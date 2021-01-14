@@ -15,26 +15,14 @@ The following exploration policies have been implemented:
 ## Quick start
 
 To compile Gaussian Bandit code use:
-'''
+```
 make -f Makefile.gaus
-'''
+```
 
-to run the executable:
-'''
-./a.out
-'''
-
-And insert the requested parameters. 
+run the executable with `./a.out` and insert the requested parameters. 
 
 
 In the same way, to compile Bernoulli Bandit code use:
-'''
+```
 make -f Makefile.bern
-'''
-
-to run the executable:
-'''
-./a.out
-'''
-
-And insert the requested parameters. 
+```
