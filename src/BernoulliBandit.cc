@@ -18,10 +18,10 @@ BernoulliBandit::BernoulliBandit(const int n, double e, double l, double Qmax): 
 double BernoulliBandit::sample_return(int a){
 
     double r = 0;
-    std::default_random_engine generator;
-    std::bernoulli_distribution distribution(true_values[a]);
-    r = distribution(generator);
-    //std::cout <<"return sampled "<<r<<std::endl;
+    double randvar = r = ((double) rand() / (RAND_MAX));
+    if (randvar < true_values[a]){
+        r = 1;
+    }
     return r;
     
 };
